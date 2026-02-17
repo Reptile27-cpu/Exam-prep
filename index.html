@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Papers Portal - Grade 8, 10 & 12</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .grade-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .grade-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .paper-link {
+            transition: all 0.2s ease;
+        }
+        .paper-link:hover {
+            background-color: #f3f4f6;
+            padding-left: 1.5rem;
+        }
+        .year-section {
+            display: none;
+        }
+        .year-section.active {
+            display: block;
+        }
+        .year-tab {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .year-tab:hover {
+            background-color: #e5e7eb;
+        }
+        .year-tab.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .blurred-content {
+            filter: blur(8px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Social Gate Popup -->
+    <div id="socialGate" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 max-w-md text-center shadow-2xl">
+            <h2 class="text-2xl font-bold mb-4">📚 Unlock Free Exam Papers</h2>
+            <p class="text-gray-600 mb-6">
+                Follow my socials to support the project and unlock all past exam papers.
+            </p>
+
+            <div class="space-y-3">
+                <a href="https://www.instagram.com/reptile.not.responding?igsh=MW14MWl0NjBza2FjdA%3D%3D&utm_source=qr" target="_blank"
+                   class="block w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600">
+                   <i class="fab fa-instagram mr-2"></i> Follow on Instagram
+                </a>
+
+                <a href="https://www.tiktok.com/@reptile.py?_r=1&_t=ZS-940Dw3U8JdM" target="_blank"
+                   class="block w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800">
+                   <i class="fab fa-tiktok mr-2"></i> Follow on TikTok
+                </a>
+
+                <button onclick="unlockSite()"
+                    class="w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600">
+                    I Followed – Unlock Papers 🔓
+                </button>
+            </div>
+
+            <p class="text-xs text-gray-400 mt-4">
+                100% Free Educational Resources
+            </p>
+        </div>
+    </div>
+
+<header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+    <div class="container mx-auto px-4 py-6">
+        <h1 class="text-3xl font-bold">Exam Papers Portal</h1>
+        <p class="text-blue-100">Past Exam Papers for Grade 8, 10 & 12</p>
+        
+        <!-- Social Media Links -->
+        <div class="flex space-x-4 mt-4">
+            <a href="https://www.tiktok.com/@reptile.py?_r=1&_t=ZS-940Dw3U8JdM" 
+               target="_blank" 
+               class="flex items-center space-x-2 text-white hover:text-blue-200 transition">
+                <i class="fab fa-tiktok text-xl"></i>
+                <span class="text-sm">TikTok</span>
+            </a>
+            <a href="https://www.instagram.com/reptile.not.responding?igsh=MW14MWl0NjBza2FjdA%3D%3D&utm_source=qr" 
+               target="_blank" 
+               class="flex items-center space-x-2 text-white hover:text-pink-200 transition">
+                <i class="fab fa-instagram text-xl"></i>
+                <span class="text-sm">Instagram</span>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="container mx-auto px-4 py-8" id="mainContent">
+
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+
+        <!-- Grade 8 -->
+        <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-green-500 text-white p-4">
+                <h2 class="text-2xl font-bold">Grade 8</h2>
+            </div>
+            <div class="p-4">
+                <div id="grade8-content"></div>
+            </div>
+        </div>
+
+        <!-- Grade 10 -->
+        <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-blue-500 text-white p-4">
+                <h2 class="text-2xl font-bold">Grade 10</h2>
+            </div>
+            <div class="p-4">
+                <div id="grade10-content"></div>
+            </div>
+        </div>
+
+        <!-- Grade 12 -->
+        <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-purple-500 text-white p-4">
+                <h2 class="text-2xl font-bold">Grade 12</h2>
+            </div>
+            <div class="p-4">
+                <div id="grade12-content"></div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+// ===== YOUR EXAM DATA =====
+const examPapers = {
+    grade8: {
+        years: {
+            '2010': [
+                '2010GR8COMBINEDSUBJECTEXAMINATION.pdf',
+                '2010GR8ENGLISHEXAM.pdf',
+                '2010GR8MATHSEXAM.pdf'
+            ],
+            '2011': [
+                '2011GR8COMBINEDSUBJECTEXAM_ANSWERSHEET.pdf',
+                '2011GR8ENGLISHEXAM_ANSWERSHEET.pdf',
+                '2011GR8MATHSEXAM_ANSWERSHEET.pdf'
+            ]
+        }
+    },
+    grade10: {
+        years: {
+            '2011': [
+                '2011GR10AGRICULTUREEXAM.pdf',
+                '2011GR10ARTSEXAM.pdf',
+                '2011GR10BUSINESSSTUDIESEXAM.pdf',
+                '2011GR10DESIGNTECHSTUDIESEXAM.pdf',
+                '2011GR10ENGLISHEXAM.pdf',
+                '2011GR10MATHSEXAM.pdf',
+                '2011GR10PERSONALDEVELOPMENTEXAM.pdf',
+                '2011GR10SCIENCEEXAM.pdf',
+                '2011GR10SOCIALSCIENCEEXAM.pdf'
+            ],
+            '2013': [
+                '2013GR10AGRICULUTREEXAM.pdf',
+                '2013GR10BUSINESSSTUDIESEXAM.pdf',
+                '2013GR10COMPUTINGSTUDIES.pdf',
+                '2013GR10DESIGNTECHNOLOGYEXAM.pdf',
+                '2013GR10ENGLISHEXAM.pdf',
+                '2013GR10HOMEECONOMICEXAM.pdf',
+                '2013GR10MATHSEXAM.pdf',
+                '2013GR10PERSONALDEVELOPMENTEXAM.pdf',
+                '2013GR10PSEXAM.pdf',
+                '2013GR10SCIENCEEXAM.pdf',
+                '2013GR10SOCIALSCIENCEEXAM.pdf'
+            ],
+            '2014': [
+                '2014GR10AGRICULTUREEXAM.pdf',
+                '2014GR10ARTSEXAM.pdf',
+                '2014GR10BUSINESSEXAM.pdf',
+                '2014GR10COMPUTINGEXAM.pdf',
+                '2014GR10DESIGNTECHEXAM.pdf',
+                '2014GR10ENGLISHEXAM.pdf',
+                '2014GR10HOMEECONOMICSEXAM.pdf',
+                '2014GR10MATHSEXAM.pdf',
+                '2014GR10PERSONALDEVELOPMENTEXAM.pdf',
+                '2014GR10PRACTICALSKILLSEXAM.pdf',
+                '2014GR10SCIENCEEXAM.pdf',
+                '2014GR10SOCIALSCIENCEEXAM.pdf'
+            ],
+            '2015': [
+                '2015GR10AGRICULTUREEXAM.pdf',
+                '2015GR10ARTSEXAM.pdf',
+                '2015GR10BUSINESSSTUDIESEXAM.pdf',
+                '2015GR10COMPUTINGEXAM.pdf',
+                '2015GR10DESIGNTECHEXAM.pdf',
+                '2015GR10ENGLISHEXAM.pdf',
+                '2015GR10HOMEECONOMICSEXAM.pdf',
+                '2015GR10MATHSEXAM.pdf',
+                '2015GR10PERSONALDEVELOPMENTEXAM.pdf',
+                '2015GR10PRACTICALSKILLSEXAM.pdf',
+                '2015GR10SCIENCEEXAM.pdf',
+                '2015GR10SOCIALSCIENCEEXAM.pdf'
+            ],
+            '2016': [
+                '2016GR10AGRICULTUREEXAM.pdf',
+                '2016GR10ARTSEXAM.pdf',
+                '2016GR10BUSINESSSTUDIESEXAM.pdf',
+                '2016GR10COMPUTINGEXAM.pdf',
+                '2016GR10DESIGNTECHEXAM.pdf',
+                '2016GR10ENGLISHEXAM.pdf',
+                '2016GR10HOMEECONOMICEXAM.pdf',
+                '2016GR10MATHSEXAM.pdf',
+                '2016GR10PERSONALDEVELOPMENTEXAM.pdf',
+                '2016GR10PRACTICALSKILLSEXAM.pdf',
+                '2016GR10SCIENCEEXAM.pdf',
+                '2016GR10SOCIALSCIENCE EXAM.pdf'
+            ]
+        }
+    },
+    grade12: {
+        years: {
+            '2011': [
+                '2011GR12ADVANCEMATHSPAPER1_2EXAM.pdf',
+                '2011GR12CHEMISTRYEXAMDATASHEET.pdf',
+                '2011GR12GEOGRAPHYEXAM.pdf',
+                '2011GR12ICTEXAM.pdf',
+                '2011GR12LANGUAGELITERATURE.pdf',
+                '2011GR12LEGALSTUDIESEXAM.pdf',
+                '2011GR12PHYSICEXAM.pdf'
+            ],
+            '2012': [
+                '2012GR12ACCOUNTINGEXAMINATION.pdf',
+                '2012GR12ADVANCEMATHSEXAMPAPER1.pdf',
+                '2012GR12ADVANCEMATHSEXAMPAPER2.pdf',
+                '2012GR12APPLIEDENGLISHEXAM.pdf',
+                '2012GR12APPLIEDSCIENCEEXAM.pdf',
+                '2012GR12BIOLOGYEXAM.pdf',
+                '2012GR12BUSINESSSTUDIESEXAM.pdf',
+                '2012GR12CHEMISTRYEXAM.pdf',
+                '2012GR12ECONOMICSEXAM.pdf',
+                '2012GR12GENERALMATHSEXAMPAPER1.pdf',
+                '2012GR12GENERALMATHSEXAMPAPER2.pdf',
+                '2012GR12GEOGRAPHYEXAM.pdf',
+                '2012GR12GEOLOGYEXAM.pdf',
+                '2012GR12HISTORYEXAM.pdf',
+                '2012GR12ICTEXAM.pdf',
+                '2012GR12LANGUAGELITERATUREEXAM.pdf',
+                '2012GR12LEGALSTUDIESEXAM.pdf',
+                '2012GR12PHYSICSEXAM.pdf'
+            ],
+            '2013': [
+                '2013APPLIEDENGLISHEXAM.pdf',
+                '2013GR12ADVANCEDMATHSP1EXAM.pdf',
+                '2013GR12APPLIEDSCIENCEEXAM.pdf',
+                '2013GR12BIOLOGYEXAM.pdf',
+                '2013GR12BUSINESSEXAM.pdf',
+                '2013GR12CHEMISTRYEXAM.pdf',
+                '2013GR12ECONOMICSEXAMS.pdf',
+                '2013GR12GENERALMATHSEXAM1.pdf',
+                '2013GR12GENERALMATHSEXAMPAPER2.pdf',
+                '2013GR12GEOGRAPHYEXAM.pdf',
+                '2013GR12GEOLOGYEXAM.pdf',
+                '2013GR12HISTROYEXAM.pdf',
+                '2013GR12ICTEXAM.pdf',
+                '2013GR12LANGUAGELITERATUREEXAM.pdf',
+                '2013GR12LEGALSTUDIESEXAM.pdf',
+                '2013GR12MATHSP2EXAM.pdf',
+                '2013GR12PHYSICSEXAM.pdf'
+            ],
+            '2014': [
+                '2014GR12ACCOUNTINGEXAM.pdf',
+                '2014GR12ADVANCEDMATHSEXAMPAPER1.pdf',
+                '2014GR12ADVANCEDMATHSPAPER2.pdf',
+                '2014GR12APPLIEDENGLISHEXAM.pdf',
+                '2014GR12APPLIEDSCIENCEEXAM.pdf',
+                '2014GR12BIOLOGYEXAM.pdf',
+                '2014GR12BUSSINESSSTUDIESEXAM.pdf',
+                '2014GR12CHEMISTRYEXAM.pdf',
+                '2014GR12ECONOMICSEXAM.pdf',
+                '2014GR12GENERALMATHSEXAMPAPER1.pdf',
+                '2014GR12GENERALMATHSEXAMPAPER2.pdf',
+                '2014GR12GEOGRAPHYEXAM.pdf',
+                '2014GR12GEOLOGYEXAM.pdf',
+                '2014GR12HISTORYEXAM.pdf',
+                '2014GR12ICTEXAM.pdf',
+                '2014GR12LANGUAGELITERATUREEXAM.pdf',
+                '2014GR12LEGALSTUDIESEXAM.pdf',
+                '2014GR12PHYSICSEXAM.pdf'
+            ],
+            '2015': [
+                '2015GR12ACCOUNTINGEXAM.pdf',
+                '2015GR12ADVMATHSEXAMPAPER1.pdf',
+                '2015GR12ADVMATHSEXAMPAPER2.pdf',
+                '2015GR12APPLIEDENGLISHEXAM.pdf',
+                '2015GR12APPLIEDSCIENCEEXAM.pdf',
+                '2015GR12BIOLOGYEXAM.pdf',
+                '2015GR12BUSSINESSSTUDIESEXAM.pdf',
+                '2015GR12CHEMISTRYEXAM.pdf',
+                '2015GR12ECONOMICSEXAM.pdf',
+                '2015GR12GENERALMATHSEXAMPAPER1.pdf',
+                '2015GR12GENERALMATHSEXAMPAPER2.pdf',
+                '2015GR12GEOGRAPHYEXAM.pdf',
+                '2015GR12GEOLOGYEXAM.pdf',
+                '2015GR12HISTORYEXAM.pdf',
+                '2015GR12ICTEXAM.pdf',
+                '2015GR12LANGUAGELITERATUREEXAM.pdf',
+                '2015GR12LEGALSTUDIESEXAM.pdf',
+                '2015GR12PHYSICSEXAM.pdf'
+            ]
+        }
+    }
+};
+
+// ===== SUBJECT DETECTOR =====
+function extractSubject(filename) {
+    if (filename.includes('COMBINEDSUBJECT')) return 'Combined Subject';
+    if (filename.includes('ADVANCEMATH') || filename.includes('ADVMATH')) return 'Advanced Maths';
+    if (filename.includes('GENERALMATH')) return 'General Maths';
+    if (filename.includes('MATH')) return 'Mathematics';
+    if (filename.includes('ENGLISH')) return 'English';
+    if (filename.includes('SOCIALSCIENCE')) return 'Social Science';
+    if (filename.includes('SCIENCE')) return 'Science';
+    if (filename.includes('APPLIEDSCIENCE')) return 'Applied Science';
+    if (filename.includes('CHEMISTRY')) return 'Chemistry';
+    if (filename.includes('PHYSIC')) return 'Physics';
+    if (filename.includes('BIOLOGY')) return 'Biology';
+    if (filename.includes('GEOGRAPHY')) return 'Geography';
+    if (filename.includes('GEOLOGY')) return 'Geology';
+    if (filename.includes('HISTORY') || filename.includes('HISTROY')) return 'History';
+    if (filename.includes('ICT')) return 'ICT';
+    if (filename.includes('COMPUTING')) return 'Computing';
+    if (filename.includes('BUSINESS')) return 'Business Studies';
+    if (filename.includes('ACCOUNTING')) return 'Accounting';
+    if (filename.includes('ECONOMICS')) return 'Economics';
+    if (filename.includes('LEGAL')) return 'Legal Studies';
+    if (filename.includes('LANGUAGE') || filename.includes('LANGUAGELITERATURE')) return 'Language & Literature';
+    if (filename.includes('APPLIEDENGLISH')) return 'Applied English';
+    if (filename.includes('AGRICULTURE') || filename.includes('AGRICULUTRE')) return 'Agriculture';
+    if (filename.includes('ARTS')) return 'Arts';
+    if (filename.includes('DESIGNTECH')) return 'Design Technology';
+    if (filename.includes('HOMEECONOMIC')) return 'Home Economics';
+    if (filename.includes('PERSONAL')) return 'Personal Development';
+    if (filename.includes('PRACTICALSKILLS') || filename.includes('PSEXAM')) return 'Practical Skills';
+    return 'Exam Paper';
+}
+
+// ===== ICONS =====
+function getIcon(subject) {
+    const map = {
+        'Combined Subject': 'fas fa-book-open',
+        'Advanced Maths': 'fas fa-infinity',
+        'General Maths': 'fas fa-square-root-alt',
+        Mathematics: 'fas fa-calculator',
+        English: 'fas fa-book',
+        'Social Science': 'fas fa-users',
+        Science: 'fas fa-flask',
+        'Applied Science': 'fas fa-cogs',
+        Chemistry: 'fas fa-atom',
+        Physics: 'fas fa-rocket',
+        Biology: 'fas fa-dna',
+        Geography: 'fas fa-globe',
+        Geology: 'fas fa-mountain',
+        History: 'fas fa-landmark',
+        ICT: 'fas fa-laptop',
+        Computing: 'fas fa-desktop',
+        'Business Studies': 'fas fa-briefcase',
+        Accounting: 'fas fa-chart-line',
+        Economics: 'fas fa-coins',
+        'Legal Studies': 'fas fa-balance-scale',
+        'Language & Literature': 'fas fa-pen-fancy',
+        'Applied English': 'fas fa-language',
+        Agriculture: 'fas fa-seedling',
+        Arts: 'fas fa-palette',
+        'Design Technology': 'fas fa-drafting-compass',
+        'Home Economics': 'fas fa-home',
+        'Personal Development': 'fas fa-user-graduate',
+        'Practical Skills': 'fas fa-tools'
+    };
+    return map[subject] || 'fas fa-file-pdf';
+}
+
+// ===== IMPORTANT: FIXED PATH FUNCTION =====
+function createPaperLink(grade, year, filename) {
+    let folderPath = "";
+
+    // MATCHES YOUR REAL FOLDER STRUCTURE EXACTLY
+    if (grade === "grade8") {
+        // C:\Exam Prep Web\GRADE8\2010GRADE8EXAM\
+        folderPath = `GRADE8/${year}GRADE8EXAM/${filename}`;
+    }
+    else if (grade === "grade10") {
+        // C:\Exam Prep Web\GRADE10\2014EXAMPAPERS\
+        folderPath = `GRADE10/${year}EXAMPAPERS/${filename}`;
+    }
+    else if (grade === "grade12") {
+        // C:\Exam Prep Web\GRADE12\2014EXAMPAPERS\
+        folderPath = `GRADE12/${year}EXAMPAPERS/${filename}`;
+    }
+
+    const subject = extractSubject(filename);
+    const icon = getIcon(subject);
+
+    return `
+        <a href="${folderPath}" target="_blank"
+           class="paper-link flex items-center justify-between p-2 rounded border border-gray-200 text-sm">
+            <div class="flex items-center">
+                <i class="${icon} mr-2 text-blue-500"></i>
+                <span class="font-medium">${subject}</span>
+            </div>
+            <i class="fas fa-external-link-alt text-gray-400 text-xs"></i>
+        </a>
+    `;
+}
+
+// ===== LOAD CONTENT =====
+function loadGradeContent(gradeId, data) {
+    const container = document.getElementById(`${gradeId}-content`);
+    const years = Object.keys(data.years).sort();
+
+    let html = '';
+
+    years.forEach((year, index) => {
+        const papers = data.years[year];
+
+        html += `<h3 class="font-bold mt-4 mb-2">${year}</h3>`;
+
+        if (papers.length === 0) {
+            html += `<p class="text-gray-500 text-sm">No papers found</p>`;
+        } else {
+            papers.forEach(file => {
+                html += createPaperLink(gradeId, year, file);
+            });
+        }
+    });
+
+    container.innerHTML = html;
+}
+
+// ===== INIT =====
+function init() {
+    loadGradeContent("grade8", examPapers.grade8);
+    loadGradeContent("grade10", examPapers.grade10);
+    loadGradeContent("grade12", examPapers.grade12);
+}
+
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", init);
+
+function unlockSite() {
+    document.getElementById("socialGate").style.display = "none";
+    localStorage.setItem("unlocked", "true");
+}
+</script>
+
+</body>
+
+</html>
