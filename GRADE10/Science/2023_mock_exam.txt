@@ -1,0 +1,95 @@
+GRADE 10 SCIENCE - 2023 MOCK EXAMINATION
+Papua New Guinea National Examination Board
+
+TIME ALLOWED: 2 hours 30 minutes
+TOTAL MARKS: 100
+
+SECTION A: PHYSICS (35 MARKS)
+
+1. (5 marks) Define the following terms:
+   a) Force
+   b) Acceleration
+   c) Momentum
+   d) Work
+   e) Power
+
+2. (10 marks) A car of mass 1200kg accelerates from rest to 25m/s in 8 seconds.
+   a) Calculate the acceleration
+   b) Find the force applied
+   c) Determine the momentum at 25m/s
+   d) Calculate the kinetic energy
+   e) If the car continues at this speed for 2 minutes, how far does it travel?
+
+3. (10 marks) Electricity
+   a) Draw the circuit diagram for a simple series circuit with a battery, switch, and two resistors
+   b) If the battery is 12V and the resistors are 4Ω and 6Ω, calculate:
+      i) Total resistance
+      ii) Current flowing
+      iii) Voltage across each resistor
+   c) Explain why parallel circuits are used in home wiring
+
+4. (10 marks) Waves and Sound
+   a) Define wavelength, frequency, and amplitude
+   b) Calculate the frequency of a wave with wavelength 0.5m traveling at 340m/s
+   c) Explain how the human ear detects sound
+   d) Why can't we hear in space?
+
+SECTION B: CHEMISTRY (35 MARKS)
+
+5. (8 marks) Atomic Structure
+   a) Draw the atomic structure of sodium (Na = 23)
+   b) Explain why sodium is highly reactive
+   c) Write the chemical equation for sodium reacting with water
+   d) What type of bond forms in NaCl?
+
+6. (12 marks) Acids and Bases
+   a) Define acid and base according to:
+      i) Arrhenius theory
+      ii) Bronsted-Lowry theory
+   b) Classify the following as acidic, basic, or neutral:
+      i) HCl  ii) NaOH  iii) NaCl  iv) Water
+   c) Calculate the pH of a solution with [H+] = 1×10⁻³ mol/L
+   d) Write the neutralization reaction between H₂SO₄ and NaOH
+
+7. (10 marks) Carbon Compounds
+   a) What is a hydrocarbon?
+   b) Draw and name the isomers of C₄H₁₀
+   c) Explain why alkanes are less reactive than alkenes
+   d) Write the balanced equation for complete combustion of ethane
+
+8. (5 marks) Chemical Reactions
+   Write balanced equations for:
+   a) Zinc + Hydrochloric acid →
+   b) Copper(II) oxide + Hydrogen →
+   c) Sodium carbonate + Hydrochloric acid →
+   d) Iron + Oxygen →
+   e) Calcium carbonate → (on heating)
+
+SECTION C: BIOLOGY (30 MARKS)
+
+9. (10 marks) Cells and Tissues
+   a) Draw and label a plant cell
+   b) State three differences between plant and animal cells
+   c) Explain the function of mitochondria
+   d) What is the importance of cell division?
+
+10. (10 marks) Human Nutrition
+   a) Draw the human digestive system
+   b) Explain the function of:
+      i) Stomach
+      ii) Small intestine
+      iii) Liver
+   c) Why is proper nutrition important for teenagers?
+
+11. (10 marks) Ecosystems
+   a) Define ecosystem and give an example
+   b) Draw a simple food chain for a PNG forest ecosystem
+   c) Explain the importance of biodiversity
+   d) How does deforestation affect the ecosystem?
+
+END OF EXAMINATION
+
+MARKING SCHEME:
+Section A: Full marks for correct definitions and calculations
+Section B: Emphasis on correct chemical equations and understanding
+Section C: Credit for accurate diagrams and biological concepts

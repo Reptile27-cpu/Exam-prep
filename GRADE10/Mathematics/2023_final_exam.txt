@@ -1,0 +1,94 @@
+GRADE 10 MATHEMATICS - 2023 FINAL EXAMINATION
+Papua New Guinea National Examination Board
+
+TIME ALLOWED: 2 hours
+TOTAL MARKS: 100
+
+INSTRUCTIONS:
+1. Write your name and school on the answer booklet
+2. Answer ALL questions in the spaces provided
+3. Show all working for calculation questions
+4. Use blue or black pen only
+
+SECTION A: MULTIPLE CHOICE (20 MARKS)
+Choose the best answer for each question.
+
+1. What is the value of x in the equation 2x + 5 = 17?
+   A) 6
+   B) 8
+   C) 11
+   D) 12
+
+2. Simplify: 3x²y × 2xy³
+   A) 5x³y⁴
+   B) 6x³y⁴
+   C) 6x²y³
+   D) 5x²y³
+
+3. Find the area of a circle with radius 7cm (π = 22/7)
+   A) 154 cm²
+   B) 44 cm²
+   C) 154 cm
+   D) 44 cm
+
+4. Solve: 3(x - 2) = 15
+   A) x = 5
+   B) x = 7
+   C) x = 8
+   D) x = 17
+
+5. The gradient of the line passing through points (2,3) and (6,11) is:
+   A) 2
+   B) 4
+   C) 8
+   D) 1/2
+
+SECTION B: SHORT ANSWER (30 MARKS)
+Show all working.
+
+6. (5 marks) Solve the simultaneous equations:
+   2x + y = 8
+   3x - 2y = 5
+
+7. (6 marks) Factorize completely: 2x² - 8x + 6
+
+8. (5 marks) Find the equation of the line with gradient 3 passing through (1,4)
+
+9. (7 marks) A rectangular garden measures 12m by 8m. If a path of uniform width is built around it, the total area becomes 160m². Find the width of the path.
+
+10. (7 marks) Solve: x² - 5x + 6 = 0
+
+SECTION C: EXTENDED RESPONSE (50 MARKS)
+
+11. (15 marks) Geometry
+    In triangle ABC, AB = 8cm, BC = 10cm, and angle ABC = 60°.
+    a) Find the length of AC using cosine rule
+    b) Find the area of triangle ABC
+    c) Find the height from B to AC
+
+12. (20 marks) Statistics and Probability
+    The following data shows the marks obtained by 40 students in a mathematics test:
+    45, 52, 48, 65, 72, 58, 61, 55, 49, 67,
+    70, 53, 47, 62, 59, 66, 71, 54, 50, 68,
+    57, 63, 69, 46, 51, 64, 73, 56, 60, 74,
+    75, 44, 76, 77, 78, 79, 80, 41, 42, 43
+
+    a) Construct a frequency distribution with class intervals of 5 marks
+    b) Draw a histogram for the data
+    c) Calculate the mean mark
+    d) Find the median mark
+    e) Determine the mode
+    f) Calculate the standard deviation
+
+13. (15 marks) Trigonometry
+    From the top of a 50m tall building, the angle of depression of a car on the ground is 30°.
+    a) Draw a diagram to represent this situation
+    b) Calculate the horizontal distance from the building to the car
+    c) If the car moves directly towards the building at 20m/s, how long will it take to reach the building?
+
+END OF EXAMINATION
+
+ANSWER KEY:
+Section A: 1)A 2)B 3)A 4)B 5)A
+Section B: 6) x=3, y=2 7) 2(x-1)(x-3) 8) y=3x+1 9) 2m 10) x=2,3
+Section C: Full solutions provided in marking guide

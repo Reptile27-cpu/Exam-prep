@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Papers Portal - Grade 8, 10 & 12</title>
+    <title>PNG Examination Papers Portal - Grade 8, 10 & 12</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -19,446 +19,743 @@
         }
         .paper-link:hover {
             background-color: #f3f4f6;
-            padding-left: 1.5rem;
+            border-color: #cbd5e1;
         }
-        .year-section {
-            display: none;
-        }
-        .year-section.active {
-            display: block;
-        }
-        .year-tab {
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .year-tab:hover {
-            background-color: #e5e7eb;
-        }
-        .year-tab.active {
-            background-color: #3b82f6;
-            color: white;
+        .tab-btn.active {
+            border-bottom: 3px solid #2563eb;
+            color: #2563eb;
+            font-weight: 700;
         }
         .blurred-content {
             filter: blur(8px);
             pointer-events: none;
+            user-select: none;
+            transition: filter 0.4s ease;
+        }
+        @keyframes modalPopIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.92) translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .modal-animate-in {
+            animation: modalPopIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .ig-gradient-btn {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            background-size: 150% 150%;
+            transition: all 0.3s ease;
+        }
+        .ig-gradient-btn:hover {
+            background-position: right center;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 39, 67, 0.4);
+        }
+        .ig-gradient-btn:active {
+            transform: translateY(0);
         }
     </style>
 </head>
 
-<body class="bg-gray-50 min-h-screen">
-    <!-- Social Gate Popup -->
-    <div id="socialGate" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-        <div class="bg-white rounded-xl p-8 max-w-md text-center shadow-2xl">
-            <h2 class="text-2xl font-bold mb-4">📚 Unlock Free Exam Papers</h2>
-            <p class="text-gray-600 mb-6">
-                Follow my socials to support the project and unlock all past exam papers.
+<body class="bg-gray-50 min-h-screen text-gray-800 flex flex-col">
+    <!-- Modern Instagram Follow Gate Popup -->
+    <div id="socialGate" 
+         class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 transition-opacity duration-300"
+         role="dialog" 
+         aria-modal="true" 
+         aria-labelledby="gateTitle" 
+         aria-describedby="gateDesc">
+        
+        <div class="modal-animate-in relative w-full max-w-md bg-[#18181b] text-gray-100 rounded-2xl p-6 sm:p-8 shadow-2xl border border-neutral-700/60 text-center">
+            
+            <!-- Creator Avatar / Icon Badge -->
+            <div class="mx-auto mb-4 w-16 h-16 rounded-full p-[2.5px] bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-lg flex items-center justify-center">
+                <div class="w-full h-full bg-[#18181b] rounded-full flex items-center justify-center text-white">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </div>
+            </div>
+
+            <!-- Heading -->
+            <h2 id="gateTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight text-white mb-2">
+                WAIT! BEFORE YOU ENTER 👋
+            </h2>
+
+            <!-- Username Badge -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-800/80 border border-neutral-700 text-xs font-semibold text-pink-400 mb-4">
+                <i class="fab fa-instagram text-xs"></i>
+                <span>@reptile.returns</span>
+            </div>
+
+            <!-- Description -->
+            <p id="gateDesc" class="text-sm text-neutral-300 leading-relaxed mb-6 font-normal">
+                Enjoying the projects and resources here? Follow me on Instagram to stay updated with new projects, coding content, and releases.
             </p>
 
+            <!-- Buttons -->
             <div class="space-y-3">
-                <a href="https://www.instagram.com/reptile.not.responding?igsh=MW14MWl0NjBza2FjdA%3D%3D&utm_source=qr" target="_blank"
-                   class="block w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600">
-                   <i class="fab fa-instagram mr-2"></i> Follow on Instagram
+                <!-- Primary Button: Follow on Instagram -->
+                <a id="followInstagramBtn" 
+                   href="https://www.instagram.com/reptile.returns/" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="ig-gradient-btn flex items-center justify-center gap-2.5 w-full text-white font-bold py-3.5 px-5 rounded-xl text-sm sm:text-base shadow-lg transition">
+                    <i class="fab fa-instagram text-lg"></i>
+                    <span>Follow on Instagram</span>
                 </a>
 
-                <a href="https://www.tiktok.com/@reptile.py?_r=1&_t=ZS-940Dw3U8JdM" target="_blank"
-                   class="block w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800">
-                   <i class="fab fa-tiktok mr-2"></i> Follow on TikTok
-                </a>
-
-                <button onclick="unlockSite()"
-                    class="w-full bg-blue-500 text-white py-3 rounded-lg font-bold hover:bg-blue-600">
-                    I Followed – Unlock Papers 🔓
+                <!-- Secondary Button: Enter Website -->
+                <button id="enterWebsiteBtn" 
+                        onclick="enterWebsite()"
+                        class="w-full py-3 px-5 rounded-xl text-sm font-semibold text-neutral-300 bg-neutral-800/90 hover:bg-neutral-700/90 hover:text-white border border-neutral-700 transition flex items-center justify-center gap-1.5">
+                    <span>I've Followed — Enter Website</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
                 </button>
             </div>
 
-            <p class="text-xs text-gray-400 mt-4">
-                100% Free Educational Resources
+            <!-- Footer text -->
+            <p class="text-xs text-neutral-400 mt-5 pt-3 border-t border-neutral-800 flex items-center justify-center gap-1">
+                Thanks for supporting my work <span class="text-red-500">❤️</span>
             </p>
         </div>
     </div>
 
-<header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
-    <div class="container mx-auto px-4 py-6">
-        <h1 class="text-3xl font-bold">Exam Papers Portal</h1>
-        <p class="text-blue-100">Past Exam Papers for Grade 8, 10 & 12</p>
-        
-        <!-- Social Media Links -->
-        <div class="flex space-x-4 mt-4">
-            <a href="https://www.tiktok.com/@reptile.py?_r=1&_t=ZS-940Dw3U8JdM" 
-               target="_blank" 
-               class="flex items-center space-x-2 text-white hover:text-blue-200 transition">
-                <i class="fab fa-tiktok text-xl"></i>
-                <span class="text-sm">TikTok</span>
-            </a>
-            <a href="https://www.instagram.com/reptile.not.responding?igsh=MW14MWl0NjBza2FjdA%3D%3D&utm_source=qr" 
-               target="_blank" 
-               class="flex items-center space-x-2 text-white hover:text-pink-200 transition">
-                <i class="fab fa-instagram text-xl"></i>
-                <span class="text-sm">Instagram</span>
-            </a>
-        </div>
-    </div>
-</header>
-
-<main class="container mx-auto px-4 py-8" id="mainContent">
-
-    <div class="grid md:grid-cols-3 gap-6 mb-8">
-
-        <!-- Grade 8 -->
-        <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden">
-            <div class="bg-green-500 text-white p-4">
-                <h2 class="text-2xl font-bold">Grade 8</h2>
-            </div>
-            <div class="p-4">
-                <div id="grade8-content"></div>
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold flex items-center gap-3">
+                        <i class="fas fa-graduation-cap"></i> Exam Papers Portal
+                    </h1>
+                    <p class="text-blue-100 mt-1">Official Papua New Guinea Past Examination Papers for Grade 8, Grade 10 & Grade 12</p>
+                </div>
+                
+                <!-- Social Media Links -->
+                <div class="flex items-center space-x-3">
+                    <a href="https://www.tiktok.com/@reptile.py?_r=1&_t=ZS-940Dw3U8JdM" 
+                       target="_blank" 
+                       class="flex items-center space-x-2 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg text-white transition">
+                        <i class="fab fa-tiktok text-lg"></i>
+                        <span class="text-sm font-medium">TikTok</span>
+                    </a>
+                    <a href="https://www.instagram.com/reptile.returns/" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="flex items-center space-x-2 bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg text-white transition">
+                        <i class="fab fa-instagram text-lg"></i>
+                        <span class="text-sm font-medium">Instagram</span>
+                    </a>
+                </div>
             </div>
         </div>
+    </header>
 
-        <!-- Grade 10 -->
-        <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden">
-            <div class="bg-blue-500 text-white p-4">
-                <h2 class="text-2xl font-bold">Grade 10</h2>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow" id="mainContent">
+
+        <!-- Controls & Filters Bar -->
+        <div class="bg-white rounded-xl shadow-md p-5 mb-8 border border-gray-100">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-4 border-b border-gray-100">
+                <!-- Search Box -->
+                <div class="relative flex-grow max-w-xl">
+                    <i class="fas fa-search absolute left-3.5 top-3.5 text-gray-400"></i>
+                    <input type="text" id="searchInput" 
+                           placeholder="Search by subject, year (e.g. 2015), or filename..." 
+                           class="w-full pl-10 pr-10 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                    <button id="clearSearch" class="hidden absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 text-sm">
+                        <i class="fas fa-times-circle"></i>
+                    </button>
+                </div>
+
+                <!-- View Switcher -->
+                <div class="flex items-center gap-2 self-end lg:self-auto">
+                    <span class="text-xs font-semibold uppercase tracking-wider text-gray-500 mr-1">View:</span>
+                    <button id="viewCardsBtn" onclick="switchView('cards')" 
+                            class="px-3 py-1.5 text-xs font-semibold rounded-md border border-blue-600 bg-blue-600 text-white transition flex items-center gap-1.5 shadow-sm">
+                        <i class="fas fa-th-large"></i> Grade Cards
+                    </button>
+                    <button id="viewTableBtn" onclick="switchView('table')" 
+                            class="px-3 py-1.5 text-xs font-semibold rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 transition flex items-center gap-1.5 shadow-sm">
+                        <i class="fas fa-table"></i> Complete Table
+                    </button>
+                </div>
             </div>
-            <div class="p-4">
-                <div id="grade10-content"></div>
+
+            <!-- Filters Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4 text-sm">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Grade</label>
+                    <select id="gradeFilter" class="w-full py-2 px-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="ALL">All Grades (8, 10, 12)</option>
+                        <option value="Grade 8">Grade 8</option>
+                        <option value="Grade 10">Grade 10</option>
+                        <option value="Grade 12">Grade 12</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Subject</label>
+                    <select id="subjectFilter" class="w-full py-2 px-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="ALL">All Subjects</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Year</label>
+                    <select id="yearFilter" class="w-full py-2 px-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="ALL">All Years</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-600 mb-1">Paper Type</label>
+                    <select id="typeFilter" class="w-full py-2 px-3 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="ALL">All Paper Types</option>
+                        <option value="Question Paper">Question Paper</option>
+                        <option value="Answer Sheet">Answer Sheet</option>
+                        <option value="Data Sheet">Data Sheet</option>
+                        <option value="Sample Exam Paper">Sample Exam Paper</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Stats & Reset Row -->
+            <div class="flex items-center justify-between text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100">
+                <div id="statsSummary">
+                    Showing <span id="displayedCount" class="font-bold text-gray-800">172</span> of <span class="font-bold text-gray-800">172</span> papers
+                </div>
+                <button onclick="resetFilters()" class="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
+                    <i class="fas fa-undo text-xs"></i> Reset Filters
+                </button>
             </div>
         </div>
 
-        <!-- Grade 12 -->
-        <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden">
-            <div class="bg-purple-500 text-white p-4">
-                <h2 class="text-2xl font-bold">Grade 12</h2>
+        <!-- 1. CARDS VIEW (Preserves original 3-column Grade cards design) -->
+        <div id="cardsView" class="grid md:grid-cols-3 gap-6 mb-8">
+
+            <!-- Grade 8 Card -->
+            <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 flex flex-col">
+                <div class="bg-green-500 text-white p-4 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold flex items-center gap-2">
+                            <i class="fas fa-graduation-cap"></i> Grade 8
+                        </h2>
+                        <p class="text-xs text-green-100 mt-0.5">Certificate of Basic Education (COBE)</p>
+                    </div>
+                    <span id="grade8-badge" class="bg-white/20 px-2.5 py-1 rounded-full text-xs font-bold">15 Papers</span>
+                </div>
+                <div class="p-4 flex-grow overflow-y-auto max-h-[750px]">
+                    <div id="grade8-content" class="space-y-4"></div>
+                </div>
             </div>
-            <div class="p-4">
-                <div id="grade12-content"></div>
+
+            <!-- Grade 10 Card -->
+            <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 flex flex-col">
+                <div class="bg-blue-500 text-white p-4 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold flex items-center gap-2">
+                            <i class="fas fa-user-graduate"></i> Grade 10
+                        </h2>
+                        <p class="text-xs text-blue-100 mt-0.5">Lower Secondary School Certificate (LSSC)</p>
+                    </div>
+                    <span id="grade10-badge" class="bg-white/20 px-2.5 py-1 rounded-full text-xs font-bold">79 Papers</span>
+                </div>
+                <div class="p-4 flex-grow overflow-y-auto max-h-[750px]">
+                    <div id="grade10-content" class="space-y-4"></div>
+                </div>
+            </div>
+
+            <!-- Grade 12 Card -->
+            <div class="grade-card bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200 flex flex-col">
+                <div class="bg-purple-500 text-white p-4 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold flex items-center gap-2">
+                            <i class="fas fa-award"></i> Grade 12
+                        </h2>
+                        <p class="text-xs text-purple-100 mt-0.5">Upper Secondary School Certificate (USSC)</p>
+                    </div>
+                    <span id="grade12-badge" class="bg-white/20 px-2.5 py-1 rounded-full text-xs font-bold">78 Papers</span>
+                </div>
+                <div class="p-4 flex-grow overflow-y-auto max-h-[750px]">
+                    <div id="grade12-content" class="space-y-4"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. TABLE VIEW (Populates all detailed columns) -->
+        <div id="tableView" class="hidden bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden mb-8">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-700 uppercase text-xs font-bold tracking-wider border-b border-gray-200">
+                            <th class="py-3.5 px-4">Grade</th>
+                            <th class="py-3.5 px-4">Subject</th>
+                            <th class="py-3.5 px-4">Year</th>
+                            <th class="py-3.5 px-4">Paper Title / Details</th>
+                            <th class="py-3.5 px-4">Paper Type</th>
+                            <th class="py-3.5 px-4">Filename</th>
+                            <th class="py-3.5 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="papersTableBody" class="divide-y divide-gray-200 text-sm">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="emptyTableMessage" class="hidden p-8 text-center text-gray-500">
+                <i class="fas fa-search text-3xl mb-2 text-gray-300"></i>
+                <p>No examination papers matched your search or filter criteria.</p>
             </div>
         </div>
 
-    </div>
-</main>
+    </main>
 
-<script>
-// ===== YOUR EXAM DATA =====
-const examPapers = {
-    grade8: {
-        years: {
-            '2010': [
-                '2010GR8COMBINEDSUBJECTEXAMINATION.pdf',
-                '2010GR8ENGLISHEXAM.pdf',
-                '2010GR8MATHSEXAM.pdf'
-            ],
-            '2011': [
-                '2011GR8COMBINEDSUBJECTEXAM_ANSWERSHEET.pdf',
-                '2011GR8ENGLISHEXAM_ANSWERSHEET.pdf',
-                '2011GR8MATHSEXAM_ANSWERSHEET.pdf'
-            ]
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-6 border-t border-gray-700 text-center text-xs">
+        <div class="container mx-auto px-4 space-y-2">
+            <p class="text-gray-300 font-medium">PNG Past Examination Papers Portal &copy; 2026</p>
+            <p>100% Free Educational Archive for Grade 8, Grade 10, and Grade 12 students in Papua New Guinea.</p>
+        </div>
+    </footer>
+
+    <!-- Papers Data Source -->
+    <script src="papersData.js"></script>
+
+    <!-- Application Script -->
+    <script>
+    // ===== FALLBACK IF DATA SOURCE IS INLINE OR LOADED EXTERNALLY =====
+    const allPapers = typeof examPapersList !== 'undefined' ? examPapersList : [];
+
+    // ===== SUBJECT ICONS =====
+    function getIcon(subject) {
+        const map = {
+            'Combined Subject': 'fas fa-book-open',
+            'Advanced Maths': 'fas fa-infinity',
+            'General Maths': 'fas fa-square-root-alt',
+            Mathematics: 'fas fa-calculator',
+            English: 'fas fa-book',
+            'Social Science': 'fas fa-users',
+            Science: 'fas fa-flask',
+            'Applied Science': 'fas fa-cogs',
+            Chemistry: 'fas fa-atom',
+            Physics: 'fas fa-rocket',
+            Biology: 'fas fa-dna',
+            Geography: 'fas fa-globe',
+            Geology: 'fas fa-mountain',
+            History: 'fas fa-landmark',
+            ICT: 'fas fa-laptop',
+            Computing: 'fas fa-desktop',
+            'Business Studies': 'fas fa-briefcase',
+            Accounting: 'fas fa-chart-line',
+            Economics: 'fas fa-coins',
+            'Legal Studies': 'fas fa-balance-scale',
+            'Language & Literature': 'fas fa-pen-fancy',
+            'Applied English': 'fas fa-language',
+            Agriculture: 'fas fa-seedling',
+            Arts: 'fas fa-palette',
+            'Design Technology': 'fas fa-drafting-compass',
+            'Home Economics': 'fas fa-home',
+            'Personal Development': 'fas fa-user-graduate',
+            'Practical Skills': 'fas fa-tools'
+        };
+        return map[subject] || 'fas fa-file-pdf';
+    }
+
+    // ===== BADGE STYLE FOR PAPER TYPE =====
+    function getTypeBadge(paperType) {
+        switch(paperType) {
+            case 'Answer Sheet':
+                return '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-100 text-emerald-800"><i class="fas fa-check-circle mr-1 text-[10px]"></i>Answer Sheet</span>';
+            case 'Data Sheet':
+                return '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800"><i class="fas fa-table mr-1 text-[10px]"></i>Data Sheet</span>';
+            case 'Sample Exam Paper':
+                return '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-purple-100 text-purple-800"><i class="fas fa-vial mr-1 text-[10px]"></i>Sample Paper</span>';
+            case 'Question Paper':
+            default:
+                return '<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"><i class="fas fa-file-alt mr-1 text-[10px]"></i>Question Paper</span>';
         }
-    },
-    grade10: {
-        years: {
-            '2011': [
-                '2011GR10AGRICULTUREEXAM.pdf',
-                '2011GR10ARTSEXAM.pdf',
-                '2011GR10BUSINESSSTUDIESEXAM.pdf',
-                '2011GR10DESIGNTECHSTUDIESEXAM.pdf',
-                '2011GR10ENGLISHEXAM.pdf',
-                '2011GR10MATHSEXAM.pdf',
-                '2011GR10PERSONALDEVELOPMENTEXAM.pdf',
-                '2011GR10SCIENCEEXAM.pdf',
-                '2011GR10SOCIALSCIENCEEXAM.pdf'
-            ],
-            '2013': [
-                '2013GR10AGRICULUTREEXAM.pdf',
-                '2013GR10BUSINESSSTUDIESEXAM.pdf',
-                '2013GR10COMPUTINGSTUDIES.pdf',
-                '2013GR10DESIGNTECHNOLOGYEXAM.pdf',
-                '2013GR10ENGLISHEXAM.pdf',
-                '2013GR10HOMEECONOMICEXAM.pdf',
-                '2013GR10MATHSEXAM.pdf',
-                '2013GR10PERSONALDEVELOPMENTEXAM.pdf',
-                '2013GR10PSEXAM.pdf',
-                '2013GR10SCIENCEEXAM.pdf',
-                '2013GR10SOCIALSCIENCEEXAM.pdf'
-            ],
-            '2014': [
-                '2014GR10AGRICULTUREEXAM.pdf',
-                '2014GR10ARTSEXAM.pdf',
-                '2014GR10BUSINESSEXAM.pdf',
-                '2014GR10COMPUTINGEXAM.pdf',
-                '2014GR10DESIGNTECHEXAM.pdf',
-                '2014GR10ENGLISHEXAM.pdf',
-                '2014GR10HOMEECONOMICSEXAM.pdf',
-                '2014GR10MATHSEXAM.pdf',
-                '2014GR10PERSONALDEVELOPMENTEXAM.pdf',
-                '2014GR10PRACTICALSKILLSEXAM.pdf',
-                '2014GR10SCIENCEEXAM.pdf',
-                '2014GR10SOCIALSCIENCEEXAM.pdf'
-            ],
-            '2015': [
-                '2015GR10AGRICULTUREEXAM.pdf',
-                '2015GR10ARTSEXAM.pdf',
-                '2015GR10BUSINESSSTUDIESEXAM.pdf',
-                '2015GR10COMPUTINGEXAM.pdf',
-                '2015GR10DESIGNTECHEXAM.pdf',
-                '2015GR10ENGLISHEXAM.pdf',
-                '2015GR10HOMEECONOMICSEXAM.pdf',
-                '2015GR10MATHSEXAM.pdf',
-                '2015GR10PERSONALDEVELOPMENTEXAM.pdf',
-                '2015GR10PRACTICALSKILLSEXAM.pdf',
-                '2015GR10SCIENCEEXAM.pdf',
-                '2015GR10SOCIALSCIENCEEXAM.pdf'
-            ],
-            '2016': [
-                '2016GR10AGRICULTUREEXAM.pdf',
-                '2016GR10ARTSEXAM.pdf',
-                '2016GR10BUSINESSSTUDIESEXAM.pdf',
-                '2016GR10COMPUTINGEXAM.pdf',
-                '2016GR10DESIGNTECHEXAM.pdf',
-                '2016GR10ENGLISHEXAM.pdf',
-                '2016GR10HOMEECONOMICEXAM.pdf',
-                '2016GR10MATHSEXAM.pdf',
-                '2016GR10PERSONALDEVELOPMENTEXAM.pdf',
-                '2016GR10PRACTICALSKILLSEXAM.pdf',
-                '2016GR10SCIENCEEXAM.pdf',
-                '2016GR10SOCIALSCIENCE EXAM.pdf'
-            ]
-        }
-    },
-    grade12: {
-        years: {
-            '2011': [
-                '2011GR12ADVANCEMATHSPAPER1_2EXAM.pdf',
-                '2011GR12CHEMISTRYEXAMDATASHEET.pdf',
-                '2011GR12GEOGRAPHYEXAM.pdf',
-                '2011GR12ICTEXAM.pdf',
-                '2011GR12LANGUAGELITERATURE.pdf',
-                '2011GR12LEGALSTUDIESEXAM.pdf',
-                '2011GR12PHYSICEXAM.pdf'
-            ],
-            '2012': [
-                '2012GR12ACCOUNTINGEXAMINATION.pdf',
-                '2012GR12ADVANCEMATHSEXAMPAPER1.pdf',
-                '2012GR12ADVANCEMATHSEXAMPAPER2.pdf',
-                '2012GR12APPLIEDENGLISHEXAM.pdf',
-                '2012GR12APPLIEDSCIENCEEXAM.pdf',
-                '2012GR12BIOLOGYEXAM.pdf',
-                '2012GR12BUSINESSSTUDIESEXAM.pdf',
-                '2012GR12CHEMISTRYEXAM.pdf',
-                '2012GR12ECONOMICSEXAM.pdf',
-                '2012GR12GENERALMATHSEXAMPAPER1.pdf',
-                '2012GR12GENERALMATHSEXAMPAPER2.pdf',
-                '2012GR12GEOGRAPHYEXAM.pdf',
-                '2012GR12GEOLOGYEXAM.pdf',
-                '2012GR12HISTORYEXAM.pdf',
-                '2012GR12ICTEXAM.pdf',
-                '2012GR12LANGUAGELITERATUREEXAM.pdf',
-                '2012GR12LEGALSTUDIESEXAM.pdf',
-                '2012GR12PHYSICSEXAM.pdf'
-            ],
-            '2013': [
-                '2013APPLIEDENGLISHEXAM.pdf',
-                '2013GR12ADVANCEDMATHSP1EXAM.pdf',
-                '2013GR12APPLIEDSCIENCEEXAM.pdf',
-                '2013GR12BIOLOGYEXAM.pdf',
-                '2013GR12BUSINESSEXAM.pdf',
-                '2013GR12CHEMISTRYEXAM.pdf',
-                '2013GR12ECONOMICSEXAMS.pdf',
-                '2013GR12GENERALMATHSEXAM1.pdf',
-                '2013GR12GENERALMATHSEXAMPAPER2.pdf',
-                '2013GR12GEOGRAPHYEXAM.pdf',
-                '2013GR12GEOLOGYEXAM.pdf',
-                '2013GR12HISTROYEXAM.pdf',
-                '2013GR12ICTEXAM.pdf',
-                '2013GR12LANGUAGELITERATUREEXAM.pdf',
-                '2013GR12LEGALSTUDIESEXAM.pdf',
-                '2013GR12MATHSP2EXAM.pdf',
-                '2013GR12PHYSICSEXAM.pdf'
-            ],
-            '2014': [
-                '2014GR12ACCOUNTINGEXAM.pdf',
-                '2014GR12ADVANCEDMATHSEXAMPAPER1.pdf',
-                '2014GR12ADVANCEDMATHSPAPER2.pdf',
-                '2014GR12APPLIEDENGLISHEXAM.pdf',
-                '2014GR12APPLIEDSCIENCEEXAM.pdf',
-                '2014GR12BIOLOGYEXAM.pdf',
-                '2014GR12BUSSINESSSTUDIESEXAM.pdf',
-                '2014GR12CHEMISTRYEXAM.pdf',
-                '2014GR12ECONOMICSEXAM.pdf',
-                '2014GR12GENERALMATHSEXAMPAPER1.pdf',
-                '2014GR12GENERALMATHSEXAMPAPER2.pdf',
-                '2014GR12GEOGRAPHYEXAM.pdf',
-                '2014GR12GEOLOGYEXAM.pdf',
-                '2014GR12HISTORYEXAM.pdf',
-                '2014GR12ICTEXAM.pdf',
-                '2014GR12LANGUAGELITERATUREEXAM.pdf',
-                '2014GR12LEGALSTUDIESEXAM.pdf',
-                '2014GR12PHYSICSEXAM.pdf'
-            ],
-            '2015': [
-                '2015GR12ACCOUNTINGEXAM.pdf',
-                '2015GR12ADVMATHSEXAMPAPER1.pdf',
-                '2015GR12ADVMATHSEXAMPAPER2.pdf',
-                '2015GR12APPLIEDENGLISHEXAM.pdf',
-                '2015GR12APPLIEDSCIENCEEXAM.pdf',
-                '2015GR12BIOLOGYEXAM.pdf',
-                '2015GR12BUSSINESSSTUDIESEXAM.pdf',
-                '2015GR12CHEMISTRYEXAM.pdf',
-                '2015GR12ECONOMICSEXAM.pdf',
-                '2015GR12GENERALMATHSEXAMPAPER1.pdf',
-                '2015GR12GENERALMATHSEXAMPAPER2.pdf',
-                '2015GR12GEOGRAPHYEXAM.pdf',
-                '2015GR12GEOLOGYEXAM.pdf',
-                '2015GR12HISTORYEXAM.pdf',
-                '2015GR12ICTEXAM.pdf',
-                '2015GR12LANGUAGELITERATUREEXAM.pdf',
-                '2015GR12LEGALSTUDIESEXAM.pdf',
-                '2015GR12PHYSICSEXAM.pdf'
-            ]
-        }
-    }
-};
-
-// ===== SUBJECT DETECTOR =====
-function extractSubject(filename) {
-    if (filename.includes('COMBINEDSUBJECT')) return 'Combined Subject';
-    if (filename.includes('ADVANCEMATH') || filename.includes('ADVMATH')) return 'Advanced Maths';
-    if (filename.includes('GENERALMATH')) return 'General Maths';
-    if (filename.includes('MATH')) return 'Mathematics';
-    if (filename.includes('ENGLISH')) return 'English';
-    if (filename.includes('SOCIALSCIENCE')) return 'Social Science';
-    if (filename.includes('SCIENCE')) return 'Science';
-    if (filename.includes('APPLIEDSCIENCE')) return 'Applied Science';
-    if (filename.includes('CHEMISTRY')) return 'Chemistry';
-    if (filename.includes('PHYSIC')) return 'Physics';
-    if (filename.includes('BIOLOGY')) return 'Biology';
-    if (filename.includes('GEOGRAPHY')) return 'Geography';
-    if (filename.includes('GEOLOGY')) return 'Geology';
-    if (filename.includes('HISTORY') || filename.includes('HISTROY')) return 'History';
-    if (filename.includes('ICT')) return 'ICT';
-    if (filename.includes('COMPUTING')) return 'Computing';
-    if (filename.includes('BUSINESS')) return 'Business Studies';
-    if (filename.includes('ACCOUNTING')) return 'Accounting';
-    if (filename.includes('ECONOMICS')) return 'Economics';
-    if (filename.includes('LEGAL')) return 'Legal Studies';
-    if (filename.includes('LANGUAGE') || filename.includes('LANGUAGELITERATURE')) return 'Language & Literature';
-    if (filename.includes('APPLIEDENGLISH')) return 'Applied English';
-    if (filename.includes('AGRICULTURE') || filename.includes('AGRICULUTRE')) return 'Agriculture';
-    if (filename.includes('ARTS')) return 'Arts';
-    if (filename.includes('DESIGNTECH')) return 'Design Technology';
-    if (filename.includes('HOMEECONOMIC')) return 'Home Economics';
-    if (filename.includes('PERSONAL')) return 'Personal Development';
-    if (filename.includes('PRACTICALSKILLS') || filename.includes('PSEXAM')) return 'Practical Skills';
-    return 'Exam Paper';
-}
-
-// ===== ICONS =====
-function getIcon(subject) {
-    const map = {
-        'Combined Subject': 'fas fa-book-open',
-        'Advanced Maths': 'fas fa-infinity',
-        'General Maths': 'fas fa-square-root-alt',
-        Mathematics: 'fas fa-calculator',
-        English: 'fas fa-book',
-        'Social Science': 'fas fa-users',
-        Science: 'fas fa-flask',
-        'Applied Science': 'fas fa-cogs',
-        Chemistry: 'fas fa-atom',
-        Physics: 'fas fa-rocket',
-        Biology: 'fas fa-dna',
-        Geography: 'fas fa-globe',
-        Geology: 'fas fa-mountain',
-        History: 'fas fa-landmark',
-        ICT: 'fas fa-laptop',
-        Computing: 'fas fa-desktop',
-        'Business Studies': 'fas fa-briefcase',
-        Accounting: 'fas fa-chart-line',
-        Economics: 'fas fa-coins',
-        'Legal Studies': 'fas fa-balance-scale',
-        'Language & Literature': 'fas fa-pen-fancy',
-        'Applied English': 'fas fa-language',
-        Agriculture: 'fas fa-seedling',
-        Arts: 'fas fa-palette',
-        'Design Technology': 'fas fa-drafting-compass',
-        'Home Economics': 'fas fa-home',
-        'Personal Development': 'fas fa-user-graduate',
-        'Practical Skills': 'fas fa-tools'
-    };
-    return map[subject] || 'fas fa-file-pdf';
-}
-
-// ===== IMPORTANT: FIXED PATH FUNCTION =====
-function createPaperLink(grade, year, filename) {
-    let folderPath = "";
-
-    // MATCHES YOUR REAL FOLDER STRUCTURE EXACTLY
-    if (grade === "grade8") {
-        // C:\Exam Prep Web\GRADE8\2010GRADE8EXAM\
-        folderPath = `GRADE8/${year}GRADE8EXAM/${filename}`;
-    }
-    else if (grade === "grade10") {
-        // C:\Exam Prep Web\GRADE10\2014EXAMPAPERS\
-        folderPath = `GRADE10/${year}EXAMPAPERS/${filename}`;
-    }
-    else if (grade === "grade12") {
-        // C:\Exam Prep Web\GRADE12\2014EXAMPAPERS\
-        folderPath = `GRADE12/${year}EXAMPAPERS/${filename}`;
     }
 
-    const subject = extractSubject(filename);
-    const icon = getIcon(subject);
+    function getGradeBadge(grade) {
+        if (grade === 'Grade 8') return '<span class="px-2 py-0.5 rounded text-xs font-bold bg-green-100 text-green-800">Grade 8</span>';
+        if (grade === 'Grade 10') return '<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-100 text-blue-800">Grade 10</span>';
+        if (grade === 'Grade 12') return '<span class="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-800">Grade 12</span>';
+        return `<span class="px-2 py-0.5 rounded text-xs font-bold bg-gray-100 text-gray-800">${grade}</span>`;
+    }
 
-    return `
-        <a href="${folderPath}" target="_blank"
-           class="paper-link flex items-center justify-between p-2 rounded border border-gray-200 text-sm">
-            <div class="flex items-center">
-                <i class="${icon} mr-2 text-blue-500"></i>
-                <span class="font-medium">${subject}</span>
-            </div>
-            <i class="fas fa-external-link-alt text-gray-400 text-xs"></i>
-        </a>
-    `;
-}
+    // Current state
+    let currentView = 'cards'; // 'cards' or 'table'
+    let filteredPapers = [...allPapers];
 
-// ===== LOAD CONTENT =====
-function loadGradeContent(gradeId, data) {
-    const container = document.getElementById(`${gradeId}-content`);
-    const years = Object.keys(data.years).sort();
+    // ===== POPULATE FILTER DROPDOWNS =====
+    function populateFilterOptions() {
+        const subjects = Array.from(new Set(allPapers.map(p => p.subject))).sort();
+        const subjectSelect = document.getElementById('subjectFilter');
+        subjects.forEach(sub => {
+            const opt = document.createElement('option');
+            opt.value = sub;
+            opt.textContent = sub;
+            subjectSelect.appendChild(opt);
+        });
 
-    let html = '';
+        const years = Array.from(new Set(allPapers.map(p => p.year))).sort((a,b) => b - a);
+        const yearSelect = document.getElementById('yearFilter');
+        years.forEach(yr => {
+            const opt = document.createElement('option');
+            opt.value = yr;
+            opt.textContent = yr;
+            yearSelect.appendChild(opt);
+        });
+    }
 
-    years.forEach((year, index) => {
-        const papers = data.years[year];
+    // ===== RENDER CARDS VIEW =====
+    function renderCardsView(papers) {
+        const grades = [
+            { id: 'grade8', label: 'Grade 8', badgeId: 'grade8-badge' },
+            { id: 'grade10', label: 'Grade 10', badgeId: 'grade10-badge' },
+            { id: 'grade12', label: 'Grade 12', badgeId: 'grade12-badge' }
+        ];
 
-        html += `<h3 class="font-bold mt-4 mb-2">${year}</h3>`;
+        grades.forEach(g => {
+            const container = document.getElementById(`${g.id}-content`);
+            const badge = document.getElementById(g.badgeId);
+            const gradePapers = papers.filter(p => p.grade === g.label);
+
+            if (badge) {
+                badge.textContent = `${gradePapers.length} Papers`;
+            }
+
+            if (gradePapers.length === 0) {
+                container.innerHTML = `<div class="p-4 text-center text-gray-400 text-sm italic">No matching papers for ${g.label}</div>`;
+                return;
+            }
+
+            // Group by year descending
+            const byYear = {};
+            gradePapers.forEach(p => {
+                if (!byYear[p.year]) byYear[p.year] = [];
+                byYear[p.year].push(p);
+            });
+
+            const sortedYears = Object.keys(byYear).sort((a,b) => b - a);
+            let html = '';
+
+            sortedYears.forEach(year => {
+                const yearPapers = byYear[year];
+                html += `
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between border-b border-gray-200 pb-1 mb-2">
+                            <h3 class="font-bold text-gray-700 text-sm flex items-center gap-1.5">
+                                <i class="far fa-calendar-alt text-gray-400"></i> Year ${year}
+                            </h3>
+                            <span class="text-xs text-gray-400 font-semibold">${yearPapers.length}</span>
+                        </div>
+                        <div class="space-y-1.5">
+                `;
+
+                yearPapers.forEach(paper => {
+                    const icon = getIcon(paper.subject);
+                    let badge = '';
+                    if (paper.paperType === 'Answer Sheet') {
+                        badge = '<span class="text-[10px] uppercase font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">Answers</span>';
+                    } else if (paper.paperType === 'Data Sheet') {
+                        badge = '<span class="text-[10px] uppercase font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">Data</span>';
+                    } else if (paper.paperType === 'Sample Exam Paper') {
+                        badge = '<span class="text-[10px] uppercase font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200">Sample</span>';
+                    }
+
+                    html += `
+                        <div class="paper-link flex items-center justify-between p-2 rounded border border-gray-200 text-sm bg-white hover:bg-gray-50 transition">
+                            <div class="flex items-center min-w-0 pr-2">
+                                <i class="${icon} mr-2 text-blue-500 flex-shrink-0 text-sm"></i>
+                                <div class="truncate">
+                                    <span class="font-medium text-gray-800 text-xs md:text-sm">${paper.title}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                ${badge}
+                                <a href="${encodeURI(paper.filePath)}" target="_blank" rel="noopener noreferrer" title="View PDF in browser"
+                                   class="text-blue-600 hover:text-blue-800 p-1 rounded hover:bg-blue-50 transition">
+                                    <i class="fas fa-eye text-xs"></i>
+                                </a>
+                                <a href="${encodeURI(paper.filePath)}" download="${encodeURIComponent(paper.filename)}" title="Download PDF"
+                                   class="text-gray-500 hover:text-gray-800 p-1 rounded hover:bg-gray-100 transition">
+                                    <i class="fas fa-download text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        });
+    }
+
+    // ===== RENDER TABLE VIEW =====
+    function renderTableView(papers) {
+        const tbody = document.getElementById('papersTableBody');
+        const emptyMsg = document.getElementById('emptyTableMessage');
 
         if (papers.length === 0) {
-            html += `<p class="text-gray-500 text-sm">No papers found</p>`;
+            tbody.innerHTML = '';
+            emptyMsg.classList.remove('hidden');
+            return;
+        }
+
+        emptyMsg.classList.add('hidden');
+        let html = '';
+
+        papers.forEach(p => {
+            const icon = getIcon(p.subject);
+            html += `
+                <tr class="hover:bg-gray-50 transition border-b border-gray-100">
+                    <td class="py-3 px-4 whitespace-nowrap">
+                        ${getGradeBadge(p.grade)}
+                    </td>
+                    <td class="py-3 px-4 font-medium text-gray-800 whitespace-nowrap">
+                        <i class="${icon} mr-2 text-blue-500"></i>${p.subject}
+                    </td>
+                    <td class="py-3 px-4 font-semibold text-gray-700 whitespace-nowrap">
+                        ${p.year}
+                    </td>
+                    <td class="py-3 px-4 text-gray-900 font-medium">
+                        ${p.title}
+                    </td>
+                    <td class="py-3 px-4 whitespace-nowrap">
+                        ${getTypeBadge(p.paperType)}
+                    </td>
+                    <td class="py-3 px-4 font-mono text-xs text-gray-500 truncate max-w-xs" title="${p.filename}">
+                        ${p.filename}
+                    </td>
+                    <td class="py-3 px-4 text-right whitespace-nowrap">
+                        <div class="flex items-center justify-end space-x-2">
+                            <a href="${encodeURI(p.filePath)}" target="_blank" rel="noopener noreferrer"
+                               class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white px-2.5 py-1 rounded text-xs font-semibold transition border border-blue-200">
+                                <i class="fas fa-eye text-[11px]"></i> View
+                            </a>
+                            <a href="${encodeURI(p.filePath)}" download="${encodeURIComponent(p.filename)}" 
+                               class="inline-flex items-center gap-1 bg-gray-100 text-gray-700 hover:bg-gray-700 hover:text-white px-2.5 py-1 rounded text-xs font-semibold transition border border-gray-200">
+                                <i class="fas fa-download text-[11px]"></i> Download
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        tbody.innerHTML = html;
+    }
+
+    // ===== FILTER AND SEARCH PIPELINE =====
+    function applyFilters() {
+        const query = document.getElementById('searchInput').value.trim().toLowerCase();
+        const selectedGrade = document.getElementById('gradeFilter').value;
+        const selectedSubject = document.getElementById('subjectFilter').value;
+        const selectedYear = document.getElementById('yearFilter').value;
+        const selectedType = document.getElementById('typeFilter').value;
+
+        // Clear button visibility
+        const clearBtn = document.getElementById('clearSearch');
+        if (query) {
+            clearBtn.classList.remove('hidden');
         } else {
-            papers.forEach(file => {
-                html += createPaperLink(gradeId, year, file);
+            clearBtn.classList.add('hidden');
+        }
+
+        filteredPapers = allPapers.filter(p => {
+            // Grade
+            if (selectedGrade !== 'ALL' && p.grade !== selectedGrade) return false;
+            // Subject
+            if (selectedSubject !== 'ALL' && p.subject !== selectedSubject) return false;
+            // Year
+            if (selectedYear !== 'ALL' && p.year !== selectedYear) return false;
+            // Type
+            if (selectedType !== 'ALL' && p.paperType !== selectedType) return false;
+
+            // Search query
+            if (query) {
+                const matchTarget = `${p.grade} ${p.subject} ${p.year} ${p.title} ${p.filename} ${p.paperType}`.toLowerCase();
+                if (!matchTarget.includes(query)) return false;
+            }
+
+            return true;
+        });
+
+        // Update stats
+        document.getElementById('displayedCount').textContent = filteredPapers.length;
+
+        // Render based on current view
+        if (currentView === 'cards') {
+            renderCardsView(filteredPapers);
+        } else {
+            renderTableView(filteredPapers);
+        }
+    }
+
+    // ===== VIEW SWITCHER =====
+    function switchView(view) {
+        currentView = view;
+        const cardsView = document.getElementById('cardsView');
+        const tableView = document.getElementById('tableView');
+        const cardsBtn = document.getElementById('viewCardsBtn');
+        const tableBtn = document.getElementById('viewTableBtn');
+
+        if (view === 'cards') {
+            cardsView.classList.remove('hidden');
+            tableView.classList.add('hidden');
+            cardsBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-md border border-blue-600 bg-blue-600 text-white transition flex items-center gap-1.5 shadow-sm';
+            tableBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 transition flex items-center gap-1.5 shadow-sm';
+            renderCardsView(filteredPapers);
+        } else {
+            cardsView.classList.add('hidden');
+            tableView.classList.remove('hidden');
+            tableBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-md border border-blue-600 bg-blue-600 text-white transition flex items-center gap-1.5 shadow-sm';
+            cardsBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 transition flex items-center gap-1.5 shadow-sm';
+            renderTableView(filteredPapers);
+        }
+    }
+
+    // ===== RESET FILTERS =====
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('gradeFilter').value = 'ALL';
+        document.getElementById('subjectFilter').value = 'ALL';
+        document.getElementById('yearFilter').value = 'ALL';
+        document.getElementById('typeFilter').value = 'ALL';
+        applyFilters();
+    }
+
+    // ===== INSTAGRAM FOLLOW GATE LOGIC =====
+    let hasClickedFollow = false;
+
+    function initSocialGate() {
+        const gate = document.getElementById('socialGate');
+        const mainContent = document.getElementById('mainContent');
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+
+        // Check sessionStorage
+        let isUnlocked = false;
+        try {
+            isUnlocked = sessionStorage.getItem('ig_gate_unlocked') === 'true';
+        } catch (e) {
+            console.warn('sessionStorage is not accessible:', e);
+        }
+
+        if (isUnlocked) {
+            if (gate) gate.style.display = 'none';
+            if (mainContent) mainContent.classList.remove('blurred-content');
+            if (header) header.classList.remove('blurred-content');
+            if (footer) footer.classList.remove('blurred-content');
+            document.body.style.overflow = '';
+        } else {
+            if (gate) {
+                gate.style.display = 'flex';
+                // Focus the Follow button for accessibility
+                const followBtn = document.getElementById('followInstagramBtn');
+                if (followBtn) followBtn.focus();
+            }
+            if (mainContent) mainContent.classList.add('blurred-content');
+            if (header) header.classList.add('blurred-content');
+            if (footer) footer.classList.add('blurred-content');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Track when user clicks Follow on Instagram button
+        const followBtn = document.getElementById('followInstagramBtn');
+        if (followBtn) {
+            followBtn.addEventListener('click', () => {
+                hasClickedFollow = true;
             });
         }
+
+        // Trap focus / support Escape & tab navigation within modal
+        if (gate) {
+            gate.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    const focusable = gate.querySelectorAll('a[href], button:not([disabled])');
+                    const firstEl = focusable[0];
+                    const lastEl = focusable[focusable.length - 1];
+                    if (e.shiftKey && document.activeElement === firstEl) {
+                        e.preventDefault();
+                        lastEl.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastEl) {
+                        e.preventDefault();
+                        firstEl.focus();
+                    }
+                }
+            });
+        }
+    }
+
+    function enterWebsite() {
+        const gate = document.getElementById('socialGate');
+        const mainContent = document.getElementById('mainContent');
+        const header = document.querySelector('header');
+        const footer = document.querySelector('footer');
+        const followBtn = document.getElementById('followInstagramBtn');
+
+        // Requirement: Visitors must click the Instagram follow button before continuing
+        if (!hasClickedFollow) {
+            // Highlight the follow button smoothly to prompt the user
+            if (followBtn) {
+                followBtn.classList.add('ring-4', 'ring-pink-400', 'animate-pulse');
+                setTimeout(() => {
+                    followBtn.classList.remove('ring-4', 'ring-pink-400', 'animate-pulse');
+                }, 1500);
+                followBtn.focus();
+            }
+            return;
+        }
+
+        // Close popup & remove blur
+        if (gate) {
+            gate.style.opacity = '0';
+            setTimeout(() => {
+                gate.style.display = 'none';
+            }, 300);
+        }
+        if (mainContent) mainContent.classList.remove('blurred-content');
+        if (header) header.classList.remove('blurred-content');
+        if (footer) footer.classList.remove('blurred-content');
+        document.body.style.overflow = '';
+
+        // Save state in sessionStorage
+        try {
+            sessionStorage.setItem('ig_gate_unlocked', 'true');
+        } catch (e) {
+            console.warn('Failed to save to sessionStorage:', e);
+        }
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+        initSocialGate();
+        populateFilterOptions();
+        applyFilters();
+
+        // Attach listeners
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('clearSearch').addEventListener('click', () => {
+            document.getElementById('searchInput').value = '';
+            applyFilters();
+        });
+        document.getElementById('gradeFilter').addEventListener('change', applyFilters);
+        document.getElementById('subjectFilter').addEventListener('change', applyFilters);
+        document.getElementById('yearFilter').addEventListener('change', applyFilters);
+        document.getElementById('typeFilter').addEventListener('change', applyFilters);
     });
-
-    container.innerHTML = html;
-}
-
-// ===== INIT =====
-function init() {
-    loadGradeContent("grade8", examPapers.grade8);
-    loadGradeContent("grade10", examPapers.grade10);
-    loadGradeContent("grade12", examPapers.grade12);
-}
-
-// Initialize on page load
-document.addEventListener("DOMContentLoaded", init);
-
-function unlockSite() {
-    document.getElementById("socialGate").style.display = "none";
-    localStorage.setItem("unlocked", "true");
-}
-</script>
-
+    </script>
 </body>
-
 </html>
